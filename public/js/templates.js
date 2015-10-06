@@ -1,0 +1,2 @@
+angular.module("app.templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("common/elements/footer/common-footer.html","<p>&copy; {{footerCtrl.year}} - {{footerCtrl.name}}</p>");
+$templateCache.put("common/elements/header/common-header.html","<ul>\r\n	<li><a href=\"/home\">home</a></li>\r\n	<li><a href=\"/about\">about</a></li>\r\n</ul>");}]);

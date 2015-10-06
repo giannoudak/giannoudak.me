@@ -1,5 +1,5 @@
 function MainController() {
-	this.message = 'hello all'
+	this.message = 'main view'
 }
 
 // $inject is necessary for minification. See http://bit.ly/1lNICde for explanation.
