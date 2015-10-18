@@ -1,4 +1,5 @@
 
 module.exports = angular.module('modules',[
-	
-]).controller('MainController',require('./main/MainController'));
+	require('./about').name
+])
+.controller('MainController',require('./main/MainController'));

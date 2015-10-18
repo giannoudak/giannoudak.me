@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>My App</title>
 	
+	
 
 	<link rel="stylesheet" href="/css/style.css">
 </head>
@@ -11,6 +12,9 @@
 	<div ng-controller="MainController as main">
 		<common-header></common-header>
 		<h1>{{ main.message }}</h1>
+		<ui-view>
+			default text
+		</ui-view>
 		<common-footer></common-footer>
 	</div>
 	

@@ -12,27 +12,47 @@ var app = angular.module('app', [
 app.config(require('./common/appConfig'))
 //app.run()
 //app.controller('MainController', ['$scope', MainController])
-},{"./common/appConfig":2,"./common/common":3,"./modules":6,"angular":10}],2:[function(require,module,exports){
-function appConfig($urlRouterProvider, $locationProvider){
+},{"./common/appConfig":2,"./common/common":3,"./modules":8,"angular":12}],2:[function(require,module,exports){
+function appConfig($urlRouterProvider, $locationProvider, $stateProvider){
 	
-	$locationProvider.html5Mode(true).hashPrefix('!');
+	$locationProvider.html5Mode({
+		enabled: false,
+		requireBase: false});
+	
+	var home = {
+		url:'/',
+		
+	};
+	var about = {
+		url:'/about',
+		templateUrl:'modules/about/about.html',
+		controller:"AboutController",
+		controllerAs:"about"
+	};
+	
+	$stateProvider.state('home',home);
+	$stateProvider.state('about',about);
+	
+
+	
+	
 	$urlRouterProvider.otherwise('/');
 	
 }
 
-appConfig.$inject = ['$urlRouterProvider', '$locationProvider'];
+appConfig.$inject = ['$urlRouterProvider', '$locationProvider','$stateProvider'];
 module.exports = appConfig;
 },{}],3:[function(require,module,exports){
 require('angular-ui-router');
 
 module.exports = angular.module('common', [
-	'ui.router',
+	require('angular-ui-router'),
 	require('./elements/header').name,
 	require('./elements/footer').name
 ]);
 
 
-},{"./elements/footer":4,"./elements/header":5,"angular-ui-router":8}],4:[function(require,module,exports){
+},{"./elements/footer":4,"./elements/header":5,"angular-ui-router":10}],4:[function(require,module,exports){
 module.exports = angular.module('commonFooter',[])
 		.directive('commonFooter',function(){
 			return {
@@ -57,20 +77,26 @@ module.exports = angular.module('commonHeader', [])
 		};
 	});
 },{}],6:[function(require,module,exports){
-
-module.exports = angular.module('modules',[
-	
-]).controller('MainController',require('./main/MainController'));
-
-},{"./main/MainController":7}],7:[function(require,module,exports){
-function MainController() {
-	this.message = 'main view'
+function AboutController(){
+	this.message = "this is the about page";
 }
 
-// $inject is necessary for minification. See http://bit.ly/1lNICde for explanation.
-//MainController.$inject = ['$scope'];
+module.exports = AboutController;
+},{}],7:[function(require,module,exports){
+module.exports = angular.module('about', [])
+    .controller('AboutController', require('./AboutController'));
+},{"./AboutController":6}],8:[function(require,module,exports){
+
+module.exports = angular.module('modules',[
+	require('./about').name
+])
+.controller('MainController',require('./main/MainController'));
+},{"./about":7,"./main/MainController":9}],9:[function(require,module,exports){
+function MainController() {
+	this.message = 'giannoudak.me'
+}
 module.exports = MainController;
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -4441,7 +4467,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -33346,10 +33372,10 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":9}]},{},[1]);
+},{"./angular":11}]},{},[1]);
 
 //# sourceMappingURL=main.js.map
