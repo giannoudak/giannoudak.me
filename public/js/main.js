@@ -7,17 +7,9 @@ var app = angular.module('app', [
 	require('./modules').name
 ])
 app.config(require('./common/appConfig'))
-app.run(['$rootScope','$state', function($rootScope, $state){
-	
-	console.log($state);
-	
-	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-		console.log(toState);
-		$rootScope.pageTitle = toState.data.pageTitle;	
-	})
-}])
+app.run(require('./common/appInit'));
 //app.controller('MainController', ['$scope', MainController])
-},{"./common/appConfig":2,"./common/common":3,"./modules":11,"angular":15}],2:[function(require,module,exports){
+},{"./common/appConfig":2,"./common/appInit":3,"./common/common":4,"./modules":12,"angular":16}],2:[function(require,module,exports){
 function appConfig($urlRouterProvider, $locationProvider, $stateProvider){
 	
 	$locationProvider.html5Mode({
@@ -55,6 +47,20 @@ function appConfig($urlRouterProvider, $locationProvider, $stateProvider){
 appConfig.$inject = ['$urlRouterProvider', '$locationProvider','$stateProvider'];
 module.exports = appConfig;
 },{}],3:[function(require,module,exports){
+function appInit($rootScope, $state){
+	
+	console.log($state);
+	
+	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+		console.log(toState);
+		$rootScope.pageTitle = toState.data.pageTitle;	
+	})
+}
+
+
+appInit.$inject = ['$rootScope', '$state'];
+module.exports = appInit;
+},{}],4:[function(require,module,exports){
 require('angular-ui-router');
 
 module.exports = angular.module('common', [
@@ -64,7 +70,7 @@ module.exports = angular.module('common', [
 ]);
 
 
-},{"./elements/footer":4,"./elements/header":5,"angular-ui-router":13}],4:[function(require,module,exports){
+},{"./elements/footer":5,"./elements/header":6,"angular-ui-router":14}],5:[function(require,module,exports){
 module.exports = angular.module('commonFooter',[])
 		.directive('commonFooter',function(){
 			return {
@@ -78,7 +84,7 @@ module.exports = angular.module('commonFooter',[])
 				controllerAs: "footerCtrl"
 			};
 		});
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 
 module.exports = angular.module('commonHeader', [])
 	.directive('commonHeader',function(){
@@ -88,47 +94,47 @@ module.exports = angular.module('commonHeader', [])
 			replace: true
 		};
 	});
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 function AboutController(){
 	this.message = "this is the about page";
 }
 
 module.exports = AboutController;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
  module.exports = angular.module('AboutDirectives',[])
 	.directive('personalInfo',require('./personalInfoDirective'))
 	.directive('contactInfo',require('./contactInfoDirective'));	
-},{"./contactInfoDirective":8,"./personalInfoDirective":9}],8:[function(require,module,exports){
+},{"./contactInfoDirective":9,"./personalInfoDirective":10}],9:[function(require,module,exports){
 module.exports = function contactInfoDirective(){
 	return {
 		restrict:'E',
 		template:"<p>giannoudak@gmail.com</p>"
 	}
 }
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = function personalInfoDirective() {
     return {
         restrict:'E',
 		template:"<p>age:27, computer engineer</p>"
     };
 };
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports = angular.module('about', [
         require('./directives/AboutDirectives').name
     ])
     .controller('AboutController', require('./controllers/AboutController'));
-},{"./controllers/AboutController":6,"./directives/AboutDirectives":7}],11:[function(require,module,exports){
+},{"./controllers/AboutController":7,"./directives/AboutDirectives":8}],12:[function(require,module,exports){
 
 module.exports = angular.module('modules',[
 	require('./about').name
 ])
 .controller('MainController', require('./main/MainController'));
-},{"./about":10,"./main/MainController":12}],12:[function(require,module,exports){
+},{"./about":11,"./main/MainController":13}],13:[function(require,module,exports){
 function MainController() {
 	this.message = 'giannoudak.me'
 }
 module.exports = MainController;
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -4499,7 +4505,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -33404,10 +33410,10 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":14}]},{},[1]);
+},{"./angular":15}]},{},[1]);
 
 //# sourceMappingURL=main.js.map
