@@ -10,7 +10,7 @@ function appConfig($urlRouterProvider, $locationProvider, $stateProvider){
 	};
 	var about = {
 		url:'/about',
-		templateUrl:'modules/about/about.html',
+		templateUrl:'modules/about/templates/about.html',
 		controller:"AboutController",
 		controllerAs:"about"
 	};

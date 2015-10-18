@@ -1,3 +1,3 @@
-angular.module("app.templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("modules/about/about.html","{{about.message}}");
-$templateCache.put("common/elements/footer/common-footer.html","<p>&copy; {{footerCtrl.year}} - {{footerCtrl.name}}</p>");
-$templateCache.put("common/elements/header/common-header.html","<ul>\r\n	<li><a ui-sref=\"home\">home</a></li>\r\n	<li><a ui-sref=\"about\">about</a></li>\r\n</ul>\r\n\r\n");}]);
+angular.module("app.templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("common/elements/footer/common-footer.html","<p>&copy; {{footerCtrl.year}} - {{footerCtrl.name}}</p>");
+$templateCache.put("common/elements/header/common-header.html","<ul>\r\n	<li><a ui-sref=\"home\">home</a></li>\r\n	<li><a ui-sref=\"about\">about</a></li>\r\n</ul>\r\n\r\n");
+$templateCache.put("modules/about/templates/about.html","{{about.message}}\r\n<personal-info></personal-info>\r\n<contact-info></contact-info>");}]);

@@ -1,7 +1,4 @@
 var angular = require('angular');
-//var router = require('angular-ui-router');
- 	
-
 
 var app = angular.module('app', [
 	'app.templates',

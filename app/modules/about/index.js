@@ -1,2 +1,4 @@
-module.exports = angular.module('about', [])
-    .controller('AboutController', require('./AboutController'));
+module.exports = angular.module('about', [
+        require('./directives/AboutDirectives').name
+    ])
+    .controller('AboutController', require('./controllers/AboutController'));

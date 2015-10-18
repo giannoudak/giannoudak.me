@@ -1,8 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var angular = require('angular');
-//var router = require('angular-ui-router');
- 	
-
 
 var app = angular.module('app', [
 	'app.templates',
@@ -12,7 +9,7 @@ var app = angular.module('app', [
 app.config(require('./common/appConfig'))
 //app.run()
 //app.controller('MainController', ['$scope', MainController])
-},{"./common/appConfig":2,"./common/common":3,"./modules":8,"angular":12}],2:[function(require,module,exports){
+},{"./common/appConfig":2,"./common/common":3,"./modules":11,"angular":15}],2:[function(require,module,exports){
 function appConfig($urlRouterProvider, $locationProvider, $stateProvider){
 	
 	$locationProvider.html5Mode({
@@ -25,7 +22,7 @@ function appConfig($urlRouterProvider, $locationProvider, $stateProvider){
 	};
 	var about = {
 		url:'/about',
-		templateUrl:'modules/about/about.html',
+		templateUrl:'modules/about/templates/about.html',
 		controller:"AboutController",
 		controllerAs:"about"
 	};
@@ -52,7 +49,7 @@ module.exports = angular.module('common', [
 ]);
 
 
-},{"./elements/footer":4,"./elements/header":5,"angular-ui-router":10}],4:[function(require,module,exports){
+},{"./elements/footer":4,"./elements/header":5,"angular-ui-router":13}],4:[function(require,module,exports){
 module.exports = angular.module('commonFooter',[])
 		.directive('commonFooter',function(){
 			return {
@@ -83,20 +80,40 @@ function AboutController(){
 
 module.exports = AboutController;
 },{}],7:[function(require,module,exports){
-module.exports = angular.module('about', [])
-    .controller('AboutController', require('./AboutController'));
-},{"./AboutController":6}],8:[function(require,module,exports){
+ module.exports = angular.module('AboutDirectives',[])
+	.directive('personalInfo',require('./personalInfoDirective'))
+	.directive('contactInfo',require('./contactInfoDirective'));	
+},{"./contactInfoDirective":8,"./personalInfoDirective":9}],8:[function(require,module,exports){
+module.exports = function contactInfoDirective(){
+	return {
+		restrict:'E',
+		template:"<p>giannoudak@gmail.com</p>"
+	}
+}
+},{}],9:[function(require,module,exports){
+module.exports = function personalInfoDirective() {
+    return {
+        restrict:'E',
+		template:"<p>age:27, computer engineer</p>"
+    };
+};
+},{}],10:[function(require,module,exports){
+module.exports = angular.module('about', [
+        require('./directives/AboutDirectives').name
+    ])
+    .controller('AboutController', require('./controllers/AboutController'));
+},{"./controllers/AboutController":6,"./directives/AboutDirectives":7}],11:[function(require,module,exports){
 
 module.exports = angular.module('modules',[
 	require('./about').name
 ])
-.controller('MainController',require('./main/MainController'));
-},{"./about":7,"./main/MainController":9}],9:[function(require,module,exports){
+.controller('MainController', require('./main/MainController'));
+},{"./about":10,"./main/MainController":12}],12:[function(require,module,exports){
 function MainController() {
 	this.message = 'giannoudak.me'
 }
 module.exports = MainController;
-},{}],10:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -4467,7 +4484,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],11:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -33372,10 +33389,10 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],12:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":11}]},{},[1]);
+},{"./angular":14}]},{},[1]);
 
 //# sourceMappingURL=main.js.map
