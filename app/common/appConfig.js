@@ -6,13 +6,20 @@ function appConfig($urlRouterProvider, $locationProvider, $stateProvider){
 	
 	var home = {
 		url:'/',
+		data:{
+			pageTitle:"home"
+		}
 		
 	};
 	var about = {
 		url:'/about',
 		templateUrl:'modules/about/templates/about.html',
 		controller:"AboutController",
-		controllerAs:"about"
+		controllerAs:"about",
+		data:{
+			pageTitle:"About"
+		}
+		
 	};
 	
 	$stateProvider.state('home',home);

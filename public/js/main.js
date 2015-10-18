@@ -7,7 +7,15 @@ var app = angular.module('app', [
 	require('./modules').name
 ])
 app.config(require('./common/appConfig'))
-//app.run()
+app.run(['$rootScope','$state', function($rootScope, $state){
+	
+	console.log($state);
+	
+	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+		console.log(toState);
+		$rootScope.pageTitle = toState.data.pageTitle;	
+	})
+}])
 //app.controller('MainController', ['$scope', MainController])
 },{"./common/appConfig":2,"./common/common":3,"./modules":11,"angular":15}],2:[function(require,module,exports){
 function appConfig($urlRouterProvider, $locationProvider, $stateProvider){
@@ -18,13 +26,20 @@ function appConfig($urlRouterProvider, $locationProvider, $stateProvider){
 	
 	var home = {
 		url:'/',
+		data:{
+			pageTitle:"home"
+		}
 		
 	};
 	var about = {
 		url:'/about',
 		templateUrl:'modules/about/templates/about.html',
 		controller:"AboutController",
-		controllerAs:"about"
+		controllerAs:"about",
+		data:{
+			pageTitle:"About"
+		}
+		
 	};
 	
 	$stateProvider.state('home',home);
